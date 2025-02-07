@@ -22,7 +22,7 @@ h2 {
 }
 
 .currency-box {
-    background: #f9f9f9;
+    background: #ffffff;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 5px;
@@ -51,10 +51,10 @@ h2 {
 }
 
 input {
-    
+    margin-top: 10px;
     width: 90%;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #221f1f;
     padding: 8px;
     font-size: 18px;
     text-align: left;
