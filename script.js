@@ -21,7 +21,7 @@ function calculate() {
 
     // Custom rates
     if (currency1 === "RWF" && currency2 === "NGN") {
-        const rate = 1.06;
+        const rate = 1.15;
         exchangeRateText.innerText = `1 RWF = ${rate} NGN`;
         amountTwo.value = (amountOne.value * rate).toFixed(2);
         return;
