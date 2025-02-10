@@ -14,7 +14,9 @@
             background-color: lightgreen;
             font-family: Arial, sans-serif;
         }
-
+select{
+    color: #065fb3;
+}
         .container {
             background: #ffffff;
             padding: 20px;
@@ -84,6 +86,9 @@
             display: flex;
             gap: 5px;
             align-items: center;
+        }
+        p{
+            color:green;
         }
 
         .arrow-box {
@@ -158,7 +163,7 @@
         </div>
 
         <!-- Exchange Rate Display -->
-        <p id="exchange-rate"></p>
+       <p>amount will display down here</p>   <p id="exchange-rate"></p>
     </div>
 
     <script>
@@ -222,7 +227,7 @@
             }
 
             // Fetch rates from API
-            fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${currency1}`)
+            fetch(`https://v6.exchangerate-api.com/v6/8865dfa71d537400aa1855c1/latest/${currency1}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.conversion_rates) {
