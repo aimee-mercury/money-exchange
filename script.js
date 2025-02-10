@@ -26,11 +26,25 @@ function calculate() {
         amountTwo.value = (amountOne.value * rate).toFixed(2);
         return;
     } else if (currency1 === "NGN" && currency2 === "RWF") {
-        const rate = 0.87;
+        const rate = 0.85;
         exchangeRateText.innerText = `1 NGN = ${rate} RWF`;
         amountTwo.value = (amountOne.value * rate).toFixed(2);
         return;
     }
+
+    // Custom rates
+    if (currency1 === "USD" && currency2 === "RWF") {
+        const rate = 1397;
+        exchangeRateText.innerText = `1 USD = ${rate} RWF`;
+        amountTwo.value = (amountOne.value * rate).toFixed(2);
+        return;
+    } else if (currency1 === "USD" && currency2 === "NGN") {
+        const rate = 1535;
+        exchangeRateText.innerText = `1 USD = ${rate} NGN`;
+        amountTwo.value = (amountOne.value * rate).toFixed(2);
+        return;
+    }
+   
 
     // Fetch rates from API
     fetch(`https://v6.exchangerate-api.com/v6/8865dfa71d537400aa1855c1/latest/${currency1}`)
