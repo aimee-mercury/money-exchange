@@ -5,7 +5,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Converter</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: lightgreen;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .currency-box {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .currency-select {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .currency-select img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .currency-select select {
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-weight: bold;
+            flex: 1;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input {
+            margin-top: 10px;
+            width: 90%;
+            border: none;
+            border-bottom: 1px solid #221f1f;
+            padding: 8px;
+            font-size: 18px;
+            text-align: left;
+            outline: none;
+        }
+
+        .swap-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        #swap {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .arrow-box {
+            background: #6197ca; 
+            color: white;
+            padding: 5px 10px; 
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px; 
+        }
+
+        #exchange-rate {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #161616;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,22 +116,24 @@
                     alt="Flag">
                 <select id="currency-one">
                     <option value="USD"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
                         USD - US Dollar</option>
                     <option value="NGN"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
                         NGN - Nigerian Naira</option>
                     <option value="RWF"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
                         RWF - Rwandan Franc</option>
                 </select>
             </div>
             <input id="amount-one">
         </div>
 
-        <!-- Swap Button -->
         <div class="swap-container">
-            <button id="swap">⬆⬇</button>
+            <button id="swap">
+                <div class="arrow-box">⬆</div>
+                <div class="arrow-box">⬇</div>
+            </button>
         </div>
 
         <!-- Second Currency Section -->
@@ -47,13 +144,13 @@
                     alt="Flag">
                 <select id="currency-two">
                     <option value="USD"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
                         USD - US Dollar</option>
                     <option value="NGN"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
                         NGN - Nigerian Naira</option>
                     <option value="RWF"
-                        data-flag="	https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
                         RWF - Rwandan Franc</option>
                 </select>
             </div>
@@ -64,7 +161,105 @@
         <p id="exchange-rate"></p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const currencyOne = document.getElementById("currency-one");
+        const currencyTwo = document.getElementById("currency-two");
+        const flagOne = document.getElementById("flag-one");
+        const flagTwo = document.getElementById("flag-two");
+        const amountOne = document.getElementById("amount-one");
+        const amountTwo = document.getElementById("amount-two");
+        const exchangeRateText = document.getElementById("exchange-rate");
+        const swapButton = document.getElementById("swap");
+
+        const API_KEY = "8865dfa71d537400aa1855c1";
+
+        function updateFlag(selectElement, flagElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const flagPath = selectedOption.getAttribute("data-flag");
+            flagElement.src = flagPath;
+        }
+
+        function calculate() {
+            const currency1 = currencyOne.value;
+            const currency2 = currencyTwo.value;
+
+            // Custom rates
+            if (currency1 === "RWF" && currency2 === "NGN") {
+                const rate = 1.15;
+                exchangeRateText.innerText = `1 RWF = ${rate} NGN`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            } else if (currency1 === "NGN" && currency2 === "RWF") {
+                const rate = 0.85;
+                exchangeRateText.innerText = `1 NGN = ${rate} RWF`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            }
+
+            // Custom rates
+            if (currency1 === "USD" && currency2 === "RWF") {
+                const rate = 1397;
+                exchangeRateText.innerText = `1 USD = ${rate} RWF`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            } else if (currency1 === "USD" && currency2 === "NGN") {
+                const rate = 1535;
+                exchangeRateText.innerText = `1 USD = ${rate} NGN`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            }
+
+            if (currency1 === "RWF" && currency2 === "NGN") {
+                const rate = 1.15;
+                exchangeRateText.innerText = `1 RWF = ${rate} NGN`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            } else if (currency1 === "USD" && currency2 === "USD") {
+                const rate = 1;
+                exchangeRateText.innerText = `1 USD = ${rate} USD`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+                return;
+            }
+
+            // Fetch rates from API
+            fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${currency1}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.conversion_rates) {
+                        const rate = data.conversion_rates[currency2];
+                        exchangeRateText.innerText = `1 ${currency1} = ${rate.toFixed(2)} ${currency2}`;
+                        amountTwo.value = (amountOne.value * rate).toFixed(2);
+                    } else {
+                        exchangeRateText.innerText = "Error fetching exchange rates.";
+                    }
+                })
+                .catch(() => {
+                    exchangeRateText.innerText = "Failed to fetch exchange rates.";
+                });
+        }
+
+        swapButton.addEventListener("click", () => {
+            [currencyOne.value, currencyTwo.value] = [currencyTwo.value, currencyOne.value];
+            updateFlag(currencyOne, flagOne);
+            updateFlag(currencyTwo, flagTwo);
+            calculate();
+        });
+
+        currencyOne.addEventListener("change", () => {
+            updateFlag(currencyOne, flagOne);
+            calculate();
+        });
+
+        currencyTwo.addEventListener("change", () => {
+            updateFlag(currencyTwo, flagTwo);
+            calculate();
+        });
+
+        amountOne.addEventListener("input", calculate);
+        amountTwo.addEventListener("input", calculate);
+
+        calculate();
+    </script>
 </body>
 
 </html>
