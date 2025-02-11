@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
     <title>Currency Converter</title>
     <style>
         body {
@@ -14,9 +15,11 @@
             background-color: lightgreen;
             font-family: Arial, sans-serif;
         }
-select{
-    color: #065fb3;
-}
+
+        select {
+            color: #065fb3;
+        }
+
         .container {
             background: #ffffff;
             padding: 20px;
@@ -33,7 +36,7 @@ select{
 
         .currency-box {
             background: #ffffff;
-            padding: 15px;
+            padding: 30px;
             border-radius: 8px;
             margin-bottom: 5px;
         }
@@ -58,6 +61,17 @@ select{
             flex: 1;
             outline: none;
             cursor: pointer;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 10%;
+            gap: 8px;
         }
 
         input {
@@ -87,23 +101,28 @@ select{
             gap: 5px;
             align-items: center;
         }
-        p{
-            color:green;
+
+        p {
+            color: green;
         }
 
         .arrow-box {
-            background: #6197ca; 
+            background: #6197ca;
             color: white;
-            padding: 5px 10px; 
+            padding: 5px 10px;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 16px; 
+            font-size: 16px;
         }
 
         #exchange-rate {
             margin-top: 10px;
-            font-size: 16px;
-            color: #161616;
+            font-size: 20px;
+            padding: 15px;
+            border: none;
+            font-weight: bold;
+            color:white;
+            background-color:  #28a745;
         }
     </style>
 </head>
@@ -111,7 +130,10 @@ select{
 <body>
 
     <div class="container">
-        <h2>Exchange Rate Calculator</h2>
+        <div class="logo">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Vidari Exchange</span>
+        </div>
 
         <!-- First Currency Section -->
         <div class="currency-box">
@@ -131,7 +153,7 @@ select{
                         RWF - Rwandan Franc</option>
                 </select>
             </div>
-            <input id="amount-one">
+            <input id="amount-one" >
         </div>
 
         <div class="swap-container">
@@ -159,11 +181,11 @@ select{
                         RWF - Rwandan Franc</option>
                 </select>
             </div>
-            <input id="amount-two" value="0">
+            <input id="amount-two" value="0" readonly>
         </div>
 
         <!-- Exchange Rate Display -->
-       <p>amount will display down here</p>   <p id="exchange-rate"></p>
+        <button id="exchange-rate">Result will appear here</button>
     </div>
 
     <script>
@@ -176,71 +198,34 @@ select{
         const exchangeRateText = document.getElementById("exchange-rate");
         const swapButton = document.getElementById("swap");
 
-        const API_KEY = "8865dfa71d537400aa1855c1";
-
         function updateFlag(selectElement, flagElement) {
             const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const flagPath = selectedOption.getAttribute("data-flag");
-            flagElement.src = flagPath;
+            flagElement.src = selectedOption.getAttribute("data-flag");
         }
 
         function calculate() {
             const currency1 = currencyOne.value;
             const currency2 = currencyTwo.value;
+            const amount = parseFloat(amountOne.value) || 0;
 
-            // Custom rates
-            if (currency1 === "RWF" && currency2 === "NGN") {
-                const rate = 1.15;
-                exchangeRateText.innerText = `1 RWF = ${rate} NGN`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
-                return;
-            } else if (currency1 === "NGN" && currency2 === "RWF") {
-                const rate = 0.85;
-                exchangeRateText.innerText = `1 NGN = ${rate} RWF`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
+            if (amount === 0) {
+                exchangeRateText.innerText = "Result will appear here";
+                amountTwo.value = "";
                 return;
             }
 
-            // Custom rates
-            if (currency1 === "USD" && currency2 === "RWF") {
-                const rate = 1397;
-                exchangeRateText.innerText = `1 USD = ${rate} RWF`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
-                return;
-            } else if (currency1 === "USD" && currency2 === "NGN") {
-                const rate = 1535;
-                exchangeRateText.innerText = `1 USD = ${rate} NGN`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
-                return;
-            }
+            // Example custom rates
+            const rates = {
+                "USD": { "NGN":  1535, "RWF": 1397 },
+                "NGN": { "USD": 0.0013, "RWF": 0.85 },
+                "RWF": { "USD": 0.00077, "NGN":   1.15 }
+            };
 
-            if (currency1 === "RWF" && currency2 === "NGN") {
-                const rate = 1.15;
-                exchangeRateText.innerText = `1 RWF = ${rate} NGN`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
-                return;
-            } else if (currency1 === "USD" && currency2 === "USD") {
-                const rate = 1;
-                exchangeRateText.innerText = `1 USD = ${rate} USD`;
-                amountTwo.value = (amountOne.value * rate).toFixed(2);
-                return;
-            }
+            const rate = rates[currency1][currency2] || 1;
 
-            // Fetch rates from API
-            fetch(`https://v6.exchangerate-api.com/v6/8865dfa71d537400aa1855c1/latest/${currency1}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.conversion_rates) {
-                        const rate = data.conversion_rates[currency2];
-                        exchangeRateText.innerText = `1 ${currency1} = ${rate.toFixed(2)} ${currency2}`;
-                        amountTwo.value = (amountOne.value * rate).toFixed(2);
-                    } else {
-                        exchangeRateText.innerText = "Error fetching exchange rates.";
-                    }
-                })
-                .catch(() => {
-                    exchangeRateText.innerText = "Failed to fetch exchange rates.";
-                });
+            const converted = (amount * rate).toFixed(2);
+            amountTwo.value = converted;
+            exchangeRateText.innerText = `${amount} ${currency1} = ${converted} ${currency2}`;
         }
 
         swapButton.addEventListener("click", () => {
@@ -261,9 +246,6 @@ select{
         });
 
         amountOne.addEventListener("input", calculate);
-        amountTwo.addEventListener("input", calculate);
-
-        calculate();
     </script>
 </body>
 
