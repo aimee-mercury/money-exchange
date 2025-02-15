@@ -121,8 +121,8 @@
             padding: 15px;
             border: none;
             font-weight: bold;
-            color:white;
-            background-color:  #28a745;
+            color: white;
+            background-color: #28a745;
         }
     </style>
 </head>
@@ -139,21 +139,24 @@
         <div class="currency-box">
             <div class="currency-select">
                 <img id="flag-one"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s"
                     alt="Flag">
                 <select id="currency-one">
-                    <option value="USD"
-                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
-                        USD - US Dollar</option>
+                    
                     <option value="NGN"
                         data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
                         NGN - Nigerian Naira</option>
-                    <option value="RWF"
+                        <option value="RWF"
                         data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
                         RWF - Rwandan Franc</option>
+                    <option value="USD"
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
+                        USD - US Dollar</option>
+
+
                 </select>
             </div>
-            <input id="amount-one" >
+            <input id="amount-one">
         </div>
 
         <div class="swap-container">
@@ -167,18 +170,19 @@
         <div class="currency-box">
             <div class="currency-select">
                 <img id="flag-two"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s"
                     alt="Flag">
                 <select id="currency-two">
-                    <option value="USD"
-                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
-                        USD - US Dollar</option>
-                    <option value="NGN"
-                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
-                        NGN - Nigerian Naira</option>
+                  
                     <option value="RWF"
                         data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtr4fq86nTmBMX9zHy78JsT2NttL6I2cUnVQ&s">
                         RWF - Rwandan Franc</option>
+                        <option value="NGN"
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eLzGgSG_9-nuUUqwQOo_2qUQYtlykNVlOQ&s">
+                        NGN - Nigerian Naira</option>
+                    <option value="USD"
+                        data-flag="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvxiKha-t_xVuEkEWihSVsPxob2WSgAuPYqg&s">
+                        USD - US Dollar</option>
                 </select>
             </div>
             <input id="amount-two" value="0" readonly>
@@ -216,9 +220,9 @@
 
             // Example custom rates
             const rates = {
-                "USD": { "NGN":  1535, "RWF": 1397 },
+                "USD": { "NGN": 1535, "RWF": 1397 },
                 "NGN": { "USD": 0.0013, "RWF": 0.85 },
-                "RWF": { "USD": 0.00077, "NGN":   1.15 }
+                "RWF": { "USD": 0.00077, "NGN": 1.15 }
             };
 
             const rate = rates[currency1][currency2] || 1;
